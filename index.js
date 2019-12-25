@@ -3,7 +3,6 @@ import React, { useEffect, useReducer } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
-
 // initialize type untuk Drone field
 type Drone = {
 	name: string,
@@ -34,9 +33,10 @@ const initialState: State = {
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "DronesLoaded":
+			console.log(action.payload);
 			return {
 				...state,
-				movies: action.payload,
+				drones: action.payload,
 				loading: false
 			};
 
@@ -60,18 +60,10 @@ function HelloMessage() {
 		// get drones data
 		const getDrones = async () => {
 			try {
-				const AuthStr = "Bearer".concat(
-					"cdb6180a5b712795474675a8fee61d74655f8883"
-				);
 				const response = await axios.get(
-					"http://localhost:8000/pilots",
-					{
-						headers: {
-							Authorization:
-								"Token cdb6180a5b712795474675a8fee61d74655f8883"
-						}
-					}
+					"https://my-json-server.typicode.com/dionaditya/dbdrones/db"
 				);
+				console.log(response.data.results);
 				dispatch({
 					type: "DronesLoaded",
 					payload: response.data.results
@@ -86,29 +78,32 @@ function HelloMessage() {
 		getDrones();
 	}, []);
 
+	console.log(state);
+
 	// conditional rendering with pattern matching mimics
-	if (state.loading) {
-		return <div> Loading ....</div>;
-	}
+	switch (true) {
+		case state.loading:
+			return <div> Loading ....</div>;
 
-	if (state.error) {
-		return <div> Error </div>;
-	}
+		case state.error:
+			return <div> Error</div>;
 
-	if (state.drones.length <= 0) {
-		return <div>Belum ada data</div>;
-	} else {
-		return (
-			<div>
-				{state.drones.map((drone, i) => {
-					return (
-						<ul>
-							<li key={i}>{drone.name}</li>
-						</ul>
-						);
-				})}
-			</div>
-		);
+		default:
+			if (state.drones.length <= 0) {
+				return <div>Belum ada data</div>;
+			} else {
+				return (
+					<div>
+						{state.drones.map((drone, i) => {
+							return (
+								<ul>
+									<li key={i}> {drone.name} </li>
+								</ul>
+							);
+						})}
+					</div>
+				);
+			}
 	}
 }
 
