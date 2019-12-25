@@ -1,0 +1,34 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "check": "flow"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^3.26.3",
+    "axios": "^0.19.0",
+    "flow-bin": "^0.114.0",
+    "react": "16.9.0",
+    "react-dom": "^16.12.0",
+    "z": "^1.0.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-flow": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "eslint": "^6.7.2",
+    "eslint-plugin-react": "^7.17.0",
+    "flow-typed": "^2.6.2"
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
+}
