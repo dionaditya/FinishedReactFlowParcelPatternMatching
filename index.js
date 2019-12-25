@@ -1,10 +1,8 @@
 // @flow
 import React, { useEffect, useReducer } from "react";
 import ReactDOM from "react-dom";
-import { DatePicker } from "antd";
 import axios from "axios";
 
-import "antd/dist/antd.css";
 
 // initialize type untuk Drone field
 type Drone = {
@@ -58,7 +56,6 @@ function HelloMessage() {
 	// usereducer
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-
 	useEffect(() => {
 		// get drones data
 		const getDrones = async () => {
@@ -99,19 +96,20 @@ function HelloMessage() {
 	}
 
 	if (state.drones.length <= 0) {
-				return <div>Belum ada data</div>;
-			} else {
-				return (
-					<div>
-						{state.drones.map((drone, i) => {
-							return <div key={i}>{drone.name}</div>;
-						})}
-					</div>
-				);
-			}
-
-
-	
+		return <div>Belum ada data</div>;
+	} else {
+		return (
+			<div>
+				{state.drones.map((drone, i) => {
+					return (
+						<ul>
+							<li key={i}>{drone.name}</li>
+						</ul>
+						);
+				})}
+			</div>
+		);
+	}
 }
 
 const mountNode = document.getElementById("app");
